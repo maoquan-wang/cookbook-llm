@@ -1,0 +1,26 @@
+# Python / Byte-compiled
+__pycache__/
+*.py[cod]
+*$py.class
+dist/
+
+
+# IDE
+# .vscode/
+.idea/
+.DS_Store
+
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+
+# Project Specific
+./tmp/
+./logs/
