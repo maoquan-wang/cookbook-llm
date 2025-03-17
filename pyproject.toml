@@ -6,7 +6,9 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "black>=25.1.0",
+    "datasets>=3.4.0",
     "html2text>=2024.2.26",
+    "huggingface-hub>=0.29.3",
     "isort>=6.0.1",
     "mcp>=1.4.1",
     "openai>=1.66.3",
