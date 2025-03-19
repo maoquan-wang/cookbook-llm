@@ -42,12 +42,12 @@ def load_bench_dataset() -> list[dict]:
     return rows
 
 
-def call_azure_openai_api(llm_config: dict, messages: list[dict], max_retries=3):
+def call_azure_openai_api(llm_config: dict, messages: list[dict]):
     client = AzureOpenAI(
         azure_endpoint=llm_config["azure_endpoint"],
         api_key=llm_config["api_key"],
         api_version=llm_config["api_version"],
-        max_retries=max_retries,
+        max_retries=llm_config.get("max_retries", 3),
     )
     _config = {
         "model": llm_config["model"],
