@@ -22,13 +22,19 @@ class MCPClient:
 
     async def connect_to_server(self):
         server_params = StdioServerParameters(
-            command="npx", args=["-y", "@executeautomation/playwright-mcp-server"], env=None
+            command="npx",
+            args=["-y", "@executeautomation/playwright-mcp-server"],
+            env=None,
         )
         print("========")
         print(server_params)
         print("========")
-        stdio, write = await self.exit_stack.enter_async_context(stdio_client(server_params))
-        self.session = await self.exit_stack.enter_async_context(ClientSession(stdio, write))
+        stdio, write = await self.exit_stack.enter_async_context(
+            stdio_client(server_params)
+        )
+        self.session = await self.exit_stack.enter_async_context(
+            ClientSession(stdio, write)
+        )
         await self.session.initialize()
 
         # List available tools

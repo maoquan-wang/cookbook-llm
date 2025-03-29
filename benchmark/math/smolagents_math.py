@@ -24,7 +24,9 @@ def record_to_jsonl_file(entry: dict, jsonl_file: str) -> None:
 def load_bench_dataset() -> list[dict]:
     # https://huggingface.co/spaces/smolagents/smolagents-leaderboard
     ds = load_dataset("smolagents/benchmark-v1", "math")
-    instruction = "Let's think step by step and output the final answer within \\boxed{}."
+    instruction = (
+        "Let's think step by step and output the final answer within \\boxed{}."
+    )
 
     rows = []
     for i, d in enumerate(ds["test"]):

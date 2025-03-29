@@ -15,9 +15,15 @@ class MCPClient:
         self.server_script_path = server_script_path
 
     async def connect_to_server(self):
-        server_params = StdioServerParameters(command="python", args=[self.server_script_path], env=None)
-        stdio, write = await self.exit_stack.enter_async_context(stdio_client(server_params))
-        self.session = await self.exit_stack.enter_async_context(ClientSession(stdio, write))
+        server_params = StdioServerParameters(
+            command="python", args=[self.server_script_path], env=None
+        )
+        stdio, write = await self.exit_stack.enter_async_context(
+            stdio_client(server_params)
+        )
+        self.session = await self.exit_stack.enter_async_context(
+            ClientSession(stdio, write)
+        )
         await self.session.initialize()
 
         # List available tools
@@ -26,7 +32,9 @@ class MCPClient:
         print("\nConnected to server with tools:", [tool.name for tool in tools])
 
     async def test_tool(self, currency: str):
-        result = await self.session.call_tool("get_bitcoin_price", {"currency": currency})
+        result = await self.session.call_tool(
+            "get_bitcoin_price", {"currency": currency}
+        )
         print("Tool call result: \n")
         print(result.content[0].text)
         return result

@@ -40,7 +40,9 @@ async def bitcoin_price_mcp_server() -> None:
         ]
 
     @server.call_tool()
-    async def call_tool(name: str, arguments: dict) -> Sequence[TextContent | ImageContent | EmbeddedResource]:
+    async def call_tool(
+        name: str, arguments: dict
+    ) -> Sequence[TextContent | ImageContent | EmbeddedResource]:
         """Handle tool calls for queries."""
         try:
             match name:
