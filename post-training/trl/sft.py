@@ -2,9 +2,18 @@
 
 
 from datasets import load_dataset
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoConfig, AutoModelForCausalLM, AutoTokenizer
 from trl import ModelConfig, ScriptArguments, SFTConfig, SFTTrainer, TrlParser
 from trl.trainer import SFTTrainer
+
+
+def add_special_tokens(tokenizer, model_name_or_path: str):
+    model_config = AutoConfig.from_pretrained(model_name_or_path)
+    n_place_holder = model_config.vocab_size - tokenizer.vocab_size
+    print(f"there are {n_place_holder} reseved tokens in the model for customization")
+    additional_special_tokens = {"additional_special_tokens": ["<think>", "</think>"]}
+    tokenizer.add_special_tokens(additional_special_tokens)
+    return tokenizer
 
 
 def main(script_args, training_args, model_args):
@@ -19,6 +28,7 @@ def main(script_args, training_args, model_args):
     )
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
+    tokenizer = add_special_tokens(tokenizer, model_args.model_name_or_path)
 
     model = AutoModelForCausalLM.from_pretrained(model_args.model_name_or_path)
 
