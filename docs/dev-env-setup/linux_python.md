@@ -25,7 +25,8 @@ git lfs pull # Fetch Git LFS changes from the remote
 
 ```bash
 # pip for python3
-sudo apt-get install python3-pip
+# sudo apt-get install python3-pip
+python3 -m ensurepip --upgrade
 
 # install uv
 python3 -m pip install uv
